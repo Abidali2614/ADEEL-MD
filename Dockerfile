@@ -7,16 +7,16 @@ RUN apt-get update && apt-get install -y git
 # Clone your bot
 RUN git clone https://github.com/Adeel-Xtech/ADEEL-MD.git /root/adeel-bot
 
-# Set working directory to the cloned folder
+# Set working directory
 WORKDIR /root/adeel-bot
 
 # Install dependencies
 RUN npm install --legacy-peer-deps || true
 RUN npm install -g pm2
 
-# Expose correct port for Render & Heroku
+# Expose port
 EXPOSE 3000
 ENV PORT=3000
 
-# Start the bot
-CMD ["npm", "start"]
+# Start the bot with pm2-runtime
+CMD ["pm2-runtime", "index.js", "--name", "ADEEL-MD"]
